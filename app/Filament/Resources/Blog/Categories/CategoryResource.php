@@ -23,6 +23,8 @@ class CategoryResource extends Resource
 
     protected static string | UnitEnum | null $navigationGroup = 'Blog';
 
+    protected static ?string $navigationLabel = 'Blog Categories';
+
     protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?int $navigationSort = 1;
