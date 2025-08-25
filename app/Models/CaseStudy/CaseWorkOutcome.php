@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Models\StudyCase;
+namespace App\Models\CaseStudy;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CaseWorkOutcome extends Model
 {
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'cases_works_outcome';
 
@@ -18,6 +19,9 @@ class CaseWorkOutcome extends Model
         'stats',
     ];
 
+    /**
+     * Relationship: A CaseWorkOutcome belongs to a CaseWork
+     */
     public function caseWork()
     {
         return $this->belongsTo(CaseWork::class, 'case_work_id');

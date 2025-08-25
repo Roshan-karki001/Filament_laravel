@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\StudyCase\CaseStudies\Pages;
+namespace App\Filament\Resources\CaseStudies\Pages;
 
-use App\Filament\Resources\StudyCase\CaseStudies\CaseStudyResource;
-
+use App\Filament\Resources\CaseStudies\CaseStudyResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;

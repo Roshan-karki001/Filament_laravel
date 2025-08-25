@@ -1,5 +1,6 @@
 <?php
-namespace App\Models\StudyCase;
+
+namespace App\Models\CaseStudy;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ class CaseStudy extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'cases';
+    protected $table = 'cases'; // Table name
 
     protected $fillable = [
         'title',
@@ -23,11 +24,17 @@ class CaseStudy extends Model
         'cases_tags',
     ];
 
+    /**
+     * Relationship: A CaseStudy has many CaseWorks
+     */
     public function works()
     {
         return $this->hasMany(CaseWork::class, 'case_id');
     }
 
+    /**
+     * Relationship: A CaseStudy has many Images
+     */
     public function images()
     {
         return $this->hasMany(CaseImage::class, 'case_id');
