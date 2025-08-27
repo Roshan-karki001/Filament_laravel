@@ -49,11 +49,13 @@ class CaseStudyForm
                         ->label('Tags')
                         ->placeholder('Add tags (use comma or enter)')
                         ->columnSpanFull()
-                        ->afterStateHydrated(
-                            fn($component, $state) =>
-                            $component->state(is_array($state) ? $state : ($state ? explode(',', $state) : []))
-                        )
-                        ->dehydrateStateUsing(fn($state) => is_array($state) ? $state : explode(',', $state)),
+                        ->afterStateHydrated(fn($component, $state) => $component->state($state ?? []))
+                        ->dehydrateStateUsing(fn($state) => $state ?? [])
+                        ->dehydrated() // <-- this is crucial
+
+
+
+
                 ])
                 ->columns(2),
 
@@ -148,7 +150,7 @@ class CaseStudyForm
                                 ->maxSize(1024) // 1MB
                                 ->required(),
                         ])
-                        
+
                         ->label('Case Images')
                         ->collapsible()
                         ->addActionLabel('Add Image')
