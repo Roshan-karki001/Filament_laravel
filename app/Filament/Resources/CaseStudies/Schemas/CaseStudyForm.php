@@ -6,21 +6,18 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Repeater;
 use Filament\Schemas\Components\Section;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\SpatieTagsInput;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Form;
-use Closure;
+use Filament\Forms\Components\FileUpload;
+use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Support\Str;
-use App\Models\CaseStudy;
-
 
 class CaseStudyForm
 {
     public static function configure($form)
     {
         return $form->schema([
+
             // Section 1: Case Details
             Section::make('Case Details')
                 ->schema([
@@ -29,7 +26,7 @@ class CaseStudyForm
                         ->live(onBlur: true)
                         ->maxLength(255)
                         ->afterStateUpdated(
-                            fn(string $operation, $state, Closure $set) =>
+                            fn(string $operation, $state, Set $set) =>
                             $operation === 'create' ? $set('slug', Str::slug($state)) : null
                         ),
 
@@ -37,8 +34,7 @@ class CaseStudyForm
                         ->disabled()
                         ->dehydrated()
                         ->required()
-                        ->maxLength(255)
-                        ->unique('App\Models\CaseStudy', 'slug', ignoreRecord: true),
+                        ->maxLength(255),
 
                     RichEditor::make('description')
                         ->required()
@@ -51,9 +47,13 @@ class CaseStudyForm
 
                     SpatieTagsInput::make('cases_tags')
                         ->label('Tags')
-                        ->type('cases_tags')
                         ->placeholder('Add tags (use comma or enter)')
-                        ->columnSpanFull(),
+                        ->columnSpanFull()
+                        ->afterStateHydrated(
+                            fn($component, $state) =>
+                            $component->state(is_array($state) ? $state : ($state ? explode(',', $state) : []))
+                        )
+                        ->dehydrateStateUsing(fn($state) => is_array($state) ? $state : explode(',', $state)),
                 ])
                 ->columns(2),
 
@@ -69,12 +69,13 @@ class CaseStudyForm
             // Section 3: Thumbnail
             Section::make('Thumbnail')
                 ->schema([
-                    SpatieMediaLibraryFileUpload::make('thumbnail')
-                        ->collection('thumbnails')
+                    FileUpload::make('thumbnail')
                         ->label('Thumbnail')
                         ->image()
+                        ->disk('public')
+                        ->directory('case-studies/thumbnails') // stored in storage/app/public/case-studies/thumbnails
                         ->acceptedFileTypes(['image/jpeg', 'image/png'])
-                        ->maxSize(1024)
+                        ->maxSize(1024) // 1MB
                         ->imagePreviewHeight('250')
                         ->helperText('Upload a thumbnail image (Max: 1MB).')
                         ->columnSpanFull(),
@@ -86,16 +87,41 @@ class CaseStudyForm
                     Repeater::make('works')
                         ->relationship('works')
                         ->schema([
-                            TextInput::make('title')->required()->maxLength(255),
-                            TextInput::make('slug')->required()->maxLength(255),
+                            TextInput::make('title')
+                                ->required()
+                                ->maxLength(255)
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(
+                                    fn(string $operation, $state, Set $set) =>
+                                    $operation === 'create' ? $set('slug', Str::slug($state)) : null
+                                ),
+                            TextInput::make('slug')
+                                ->disabled()
+                                ->dehydrated()
+                                ->required()
+                                ->maxLength(255),
+
                             Textarea::make('description')->label('Description'),
 
                             // Nested Outcomes inside each Work
                             Repeater::make('outcomes')
                                 ->relationship('outcomes')
                                 ->schema([
-                                    TextInput::make('title')->required()->maxLength(255),
-                                    TextInput::make('slug')->required()->maxLength(255),
+                                    TextInput::make('title')
+                                        ->required()
+                                        ->maxLength(255)
+                                        ->live(onBlur: true)
+                                        ->afterStateUpdated(
+                                            fn(string $operation, $state, Set $set) =>
+                                            $operation === 'create' ? $set('slug', Str::slug($state)) : null
+                                        ),
+
+                                    TextInput::make('slug')
+                                        ->disabled()
+                                        ->dehydrated()
+                                        ->required()
+                                        ->maxLength(255),
+
                                     TextInput::make('stats')->maxLength(255),
                                 ])
                                 ->label('Outcomes')
@@ -108,17 +134,28 @@ class CaseStudyForm
                         ->columns(2),
                 ]),
 
-            // Section 5: Images
+            // Section 5: Images (CaseImage relationship)
             Section::make('Images')
                 ->schema([
-                    SpatieMediaLibraryFileUpload::make('images')
-                        ->collection('images')
-                        ->label('Images')
-                        ->image()
-                        ->acceptedFileTypes(['image/jpeg', 'image/png'])
-                        ->helperText('Upload images (Max: 1MB).')
-                        ->columnSpanFull(),
+                    Repeater::make('images')
+                        ->relationship('images') // CaseStudy::images()
+                        ->schema([
+                            FileUpload::make('image')
+                                ->label('Upload Image')
+                                ->image()
+                                ->disk('public')
+                                ->directory('case-studies/images')
+                                ->maxSize(1024) // 1MB
+                                ->required(),
+                        ])
+                        
+                        ->label('Case Images')
+                        ->collapsible()
+                        ->addActionLabel('Add Image')
+                        ->reorderable()
+                        ->columns(1),
                 ]),
+
         ]);
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('case_id')->constrained('cases')->onDelete('cascade');
              $table->string('title')->nullable();
             $table->string('slug')->unique();
-            $table->longText('discription')->nullable();
+            $table->longText('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

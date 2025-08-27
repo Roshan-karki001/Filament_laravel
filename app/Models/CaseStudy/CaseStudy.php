@@ -15,7 +15,7 @@ class CaseStudy extends Model
     protected $fillable = [
         'title',
         'slug',
-        'discription',
+        'description',
         'link',
         'thumbnail',
         'company',
@@ -27,6 +27,11 @@ class CaseStudy extends Model
     /**
      * Relationship: A CaseStudy has many CaseWorks
      */
+
+    protected $casts = [
+        'cases_tags' => 'array',
+    ];
+
     public function works()
     {
         return $this->hasMany(CaseWork::class, 'case_id');

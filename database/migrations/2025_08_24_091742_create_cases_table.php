@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('slug')->unique();
-            $table->longText('discription')->nullable();
+            $table->longText('description')->nullable();
             $table->string('link');
             $table->string('thumbnail')->nullable( );
             $table->string('company')->nullable();
             $table->string('year')->nullable();
             $table->string('industry')->nullable();
-            $table->string('cases_tags')->nullable();
+            $table->json('cases_tags')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

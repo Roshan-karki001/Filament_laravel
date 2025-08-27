@@ -16,7 +16,7 @@ class CaseWork extends Model
         'case_id',
         'title',
         'slug',
-        'discription',
+        'description',
     ];
 
     /**
