@@ -80,8 +80,6 @@ class CaseStudiesTable
                     ->label('Year')
                     ->collapsible(),
 
-                // You can also group by created date if you prefer
-                // Group::make('created_at')->label('Created')->date()->collapsible(),
             ]);
     }
 }
