@@ -17,49 +17,40 @@ use Filament\Support\Icons\Heroicon;
 use BackedEnum;
 use UnitEnum;
 
-class TestimonialResource extends Resource
+class TestimonialsResource extends Resource   // ✅ Match file name
 {
-    protected static ?int $navigationSort = 1; 
-
     protected static ?string $model = Testimonials::class;
 
-    // Use a valid Heroicon for the sidebar
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedStar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    // Navigation group
     protected static string|UnitEnum|null $navigationGroup = 'Home';
 
-    // Attribute used as record title
-    protected static ?string $recordTitleAttribute = 'testimonials';
+    protected static ?string $recordTitleAttribute = 'name'; // ✅ must exist in DB table
 
-    // URL slug for this resource
     protected static ?string $slug = 'home/testimonials';
+    
+    protected static ?int $navigationSort = 0; 
 
-    // Form schema
     public static function form(Schema $schema): Schema
     {
         return TestimonialForm::configure($schema);
     }
 
-    // Infolist schema
     public static function infolist(Schema $schema): Schema
     {
         return TestimonialInfolist::configure($schema);
     }
 
-    // Table schema
     public static function table(Table $table): Table
     {
         return TestimonialsTable::configure($table);
     }
 
-    // Any relations
     public static function getRelations(): array
     {
         return [];
     }
 
-    // Pages
     public static function getPages(): array
     {
         return [

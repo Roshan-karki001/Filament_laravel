@@ -3,17 +3,19 @@
 namespace App\Filament\Resources\Home\Testimonials\Pages;
 
 use App\Filament\Resources\Home\Testimonials\TestimonialsResource;
-use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
+use Filament\Resources\Pages\EditRecord;
 
-class ListTestimonials extends ListRecords
+class EditTestimonial extends EditRecord
 {
     protected static string $resource = TestimonialsResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            ViewAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

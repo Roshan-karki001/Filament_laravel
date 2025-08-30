@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Home\Testimonials\Pages;
+namespace App\Filament\Resources\Faqs\Pages;
 
-use App\Filament\Resources\Home\Testimonials\TestimonialResource;
+use App\Filament\Resources\Faqs\FaqResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditTestimonial extends EditRecord
+class EditFaq extends EditRecord
 {
-    protected static string $resource = TestimonialResource::class;
+    protected static string $resource = FaqResource::class;
 
     protected function getHeaderActions(): array
     {

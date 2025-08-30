@@ -20,7 +20,7 @@ use UnitEnum;
 class TrustedClientsResource extends Resource
 {
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $model = TrustedClients::class;
 
@@ -31,6 +31,7 @@ class TrustedClientsResource extends Resource
     protected static string | UnitEnum | null $navigationGroup = 'Home';
 
     protected static ?string $slug = 'home/trustedclients';
+
 
     public static function form(Schema $schema): Schema
     {
@@ -49,9 +50,7 @@ class TrustedClientsResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
