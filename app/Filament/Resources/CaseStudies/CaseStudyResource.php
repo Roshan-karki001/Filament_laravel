@@ -9,7 +9,7 @@ use App\Filament\Resources\CaseStudies\Pages\ViewCaseStudy;
 use App\Filament\Resources\CaseStudies\Schemas\CaseStudyForm;
 use App\Filament\Resources\CaseStudies\Schemas\CaseStudyInfolist;
 use App\Filament\Resources\CaseStudies\Tables\CaseStudiesTable;
-use App\Models\CaseStudy\CaseStudy;
+use App\Models\StudyCase\CaseStudy;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
