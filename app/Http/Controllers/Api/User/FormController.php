@@ -11,6 +11,7 @@ class FormController extends Controller
 {
     public function store(Request $request)
     {
+        return 123;
         $validated = $request->validate([
             'full_name'            => 'required|string|max:255',
             'work_email'           => 'required|email|max:255',

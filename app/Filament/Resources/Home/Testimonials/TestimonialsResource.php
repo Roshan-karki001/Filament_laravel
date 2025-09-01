@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Home\Testimonials;
 
-use App\Filament\Resources\Home\Testimonials\Pages\CreateTestimonial;
-use App\Filament\Resources\Home\Testimonials\Pages\EditTestimonial;
+use App\Filament\Resources\Home\Testimonials\Pages\CreateTestimonials;
+use App\Filament\Resources\Home\Testimonials\Pages\EditTestimonials;
 use App\Filament\Resources\Home\Testimonials\Pages\ListTestimonials;
-use App\Filament\Resources\Home\Testimonials\Pages\ViewTestimonial;
+use App\Filament\Resources\Home\Testimonials\Pages\ViewTestimonials;
 use App\Filament\Resources\Home\Testimonials\Schemas\TestimonialForm;
 use App\Filament\Resources\Home\Testimonials\Schemas\TestimonialInfolist;
 use App\Filament\Resources\Home\Testimonials\Tables\TestimonialsTable;
@@ -55,9 +55,9 @@ class TestimonialsResource extends Resource   // ✅ Match file name
     {
         return [
             'index' => ListTestimonials::route('/'),
-            'create' => CreateTestimonial::route('/create'),
-            'view' => ViewTestimonial::route('/{record}'),
-            'edit' => EditTestimonial::route('/{record}/edit'),
+            'create' => CreateTestimonials::route('/create'),
+            'view' => ViewTestimonials::route('/{record}'),
+            'edit' => EditTestimonials::route('/{record}/edit'),
         ];
     }
 }

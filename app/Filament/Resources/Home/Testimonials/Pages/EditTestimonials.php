@@ -7,7 +7,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditTestimonial extends EditRecord
+class EditTestimonials extends EditRecord
 {
     protected static string $resource = TestimonialsResource::class;
 

@@ -6,7 +6,7 @@ use App\Filament\Resources\Home\Testimonials\TestimonialsResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewTestimonial extends ViewRecord
+class ViewTestimonials extends ViewRecord
 {
     protected static string $resource = TestimonialsResource::class;
 
