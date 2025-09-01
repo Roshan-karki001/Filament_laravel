@@ -18,4 +18,11 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    server: {  
+        cors: {  
+            origin: [  
+                'https://localhost:8000',  
+            ],  
+        },  
+    },  
 })

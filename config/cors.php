@@ -15,11 +15,14 @@ return [
     |
     */
 
-     'paths' => ['api/*'],
+
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    'allowed_origins' => ['http://localhost:3000'], // your Next.js frontend
+    // OR use '*' during local dev
+    // 'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
@@ -30,6 +33,8 @@ return [
     'max_age' => 0,
 
     'supports_credentials' => false,
-
-
 ];
+
+
+
+
