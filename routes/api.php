@@ -7,7 +7,8 @@ use App\Http\Controllers\Api\User\{
     FaqController,
     ServiceController,
     StudyCaseController,
-    TrustedClientController
+    TrustedClientController,
+    FormController,
 };
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -20,3 +21,4 @@ Route::get('/trusted-clients', [TrustedClientController::class, 'index']);
 Route::get('/case-studies', [StudyCaseController::class, 'index']);
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/faqs', [FaqController::class, 'index']);
+Route::post('/email-form', [FormController::class, 'store']);
