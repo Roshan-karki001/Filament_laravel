@@ -11,7 +11,7 @@ class TrustedClientController extends Controller
 {
     public function index(Request $request)
     {
-        $trustedClients = TrustedClients::all();
+        $trustedClients = TrustedClients::where('is_active', true)->get();
 
         return response()->json([
             'success' => true,
