@@ -11,7 +11,7 @@ class FaqController extends Controller
 {
     public function index()
     {
-        $faqs = Faq::all();
+        $faqs = Faq::where('is_active',true)->get();
 
         return response()->json([
             'success' => true,
