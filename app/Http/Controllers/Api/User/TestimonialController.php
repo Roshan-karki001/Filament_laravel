@@ -11,12 +11,12 @@ class TestimonialController extends Controller
 {
     public function index(Request $request)
     {
-        $testimonials = Testimonials::all();
-
+        $testimonials = Testimonials::where('is_active', true)->get();
         return response()->json([
             'success' => true,
             'message' => 'Testimonials retrieved successfully',
             'data' => $testimonials
         ], Response::HTTP_OK);
+
     }
 }
