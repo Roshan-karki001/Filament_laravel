@@ -4,6 +4,7 @@ namespace App\Models\Home;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class Testimonials extends Model
 {
@@ -31,5 +32,10 @@ class Testimonials extends Model
         'rating' => 'decimal:1',
         'status' => 'boolean',
     ];
-    
+
+    protected $appends = ['avatar_path'];
+
+    public function getAvatarPathAttribute(){
+      return  $this->avatar_url ? Storage::url($this->avatar_url) : null;
+    }
 }

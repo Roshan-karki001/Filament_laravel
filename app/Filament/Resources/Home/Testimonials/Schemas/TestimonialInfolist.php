@@ -18,10 +18,9 @@ class TestimonialInfolist
                 ->schema([
                     ImageEntry::make('avatar_url')
                         ->label('Avatar Logo')
-                        ->getStateUsing(
-                            fn($record) => $record->avatar_url
-                                ? asset('storage/' . $record->avatar_url)
-                                : asset('images/default-avatar.png') // Optional fallback
+                        ->getStateUsing(fn($record) => $record->avatar_url
+                            ? asset('storage/' . $record->avatar_url)
+                            : asset('images/default-avatar.png')
                         )
                         ->columnSpanFull(),
 
@@ -38,6 +37,7 @@ class TestimonialInfolist
                         ->label('Rating')
                         ->numeric()
                         ->formatStateUsing(fn($state) => number_format($state, 1)),
+
                     IconEntry::make('status')
                         ->label('Status')
                         ->boolean()
@@ -48,12 +48,10 @@ class TestimonialInfolist
                         ->formatStateUsing(fn($state) => 'View LinkedIn')
                         ->url(fn($record) => $record->linkedin_url)
                         ->openUrlInNewTab()
-                        ->maxLength(255)
                         ->columnSpanFull(),
 
                     TextEntry::make('review_text')
                         ->label('Review')
-                        ->maxLength(1000)
                         ->columnSpanFull(),
                 ]),
         ]);

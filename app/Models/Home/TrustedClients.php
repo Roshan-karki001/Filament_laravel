@@ -4,6 +4,7 @@ namespace App\Models\Home;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class TrustedClients extends Model
 {
@@ -20,5 +21,10 @@ class TrustedClients extends Model
     protected $casts = [
     'trusted_clients' => 'array',
 ];
+protected $appends = ['logo_path'];
+
+    public function getLogoPathAttribute(){
+      return  $this->logo ? Storage::url($this->logo) : null;
+    }
 
 }
