@@ -11,7 +11,7 @@ class TestimonialController extends Controller
 {
     public function index(Request $request)
     {
-        $testimonials = Testimonials::where('is_active', true)->get();
+        $testimonials = Testimonials::all();
         return response()->json([
             'success' => true,
             'message' => 'Testimonials retrieved successfully',

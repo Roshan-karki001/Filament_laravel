@@ -15,7 +15,6 @@ class Service extends Model
         'catagory_tags',
     ];
 
-
     protected $casts = [
         'catagory_tags' => 'array',
     ];

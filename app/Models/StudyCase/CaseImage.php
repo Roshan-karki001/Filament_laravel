@@ -15,6 +15,13 @@ class CaseImage extends Model
         'case_id',
         'image',
     ];
+     protected $appends = ['image_path']; 
+
+    public function getImagePathAttribute()
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+
+    }
 
     /**
      * Relationship: A CaseImage belongs to a CaseStudy

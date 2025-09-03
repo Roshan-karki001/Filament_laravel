@@ -32,6 +32,17 @@ class CaseStudy extends Model
         'cases_tags' => 'array',
     ];
 
+     protected $appends = ['thumbnail_path']; // Include the accessor in JSON responses
+
+    /**
+     * Accessor to get full URL of logo
+     */
+    public function getthumbnailPathAttribute()
+    {
+        return $this->thumbnail ? asset('storage/' . $this->thumbnail) : null;
+
+    }
+
     public function works()
     {
         return $this->hasMany(CaseWork::class, 'case_id');

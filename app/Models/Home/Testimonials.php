@@ -31,5 +31,16 @@ class Testimonials extends Model
         'rating' => 'decimal:1',
         'status' => 'boolean',
     ];
+
+     protected $appends = ['avatar_path']; // Include the accessor in JSON responses
+
+    /**
+     * Accessor to get full URL of logo
+     */
+    public function getAvatarPathAttribute()
+    {
+        return $this->avatar_url ? asset('storage/' . $this->avatar_url) : null;
+
+    }
     
 }
