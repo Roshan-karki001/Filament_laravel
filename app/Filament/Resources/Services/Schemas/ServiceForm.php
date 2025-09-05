@@ -23,7 +23,7 @@ class ServiceForm
                     ->disk('public')
                     ->directory('service_thumbnail')
                     ->acceptedFileTypes(['image/jpeg', 'image/png'])
-                    ->maxSize(1024)
+                    ->maxSize(2024)
                     ->imagePreviewHeight('150'),
 
                 TextInput::make('title')
